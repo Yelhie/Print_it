@@ -1,4 +1,3 @@
- //variables
  const slides = [
  	{
   		"image":"slide1.jpg",
@@ -19,16 +18,12 @@
  ]
 
  let currentSlide=0;
-
  const carrouselElementsLeftArrow = document.querySelector(".arrow_left");
  const carrouselElementsRightArrow = document.querySelector(".arrow_right");
  const carrouselElementsImage = document.querySelector(".banner-img");
- const carrousellementsInfoE = document.querySelector(".banner-text");
- const carrouselElementsDots = document.querySelector(".dots");
- console.log(carrousellementsInfoE.innerHTML)
+ const carrouselElementsInfoE = document.querySelector(".banner-text");
+ const carrouselElementsDotsContainer = document.querySelector(".dots");
  
-
- //Event Listener
 carrouselElementsLeftArrow.addEventListener("click", function (){
 	carouselClick('gauche');
 });
@@ -37,50 +32,59 @@ carrouselElementsRightArrow.addEventListener("click", function (){
 	carouselClick('droite')
 });
 
-
-// création des dots
-function creaDots(){
-	for(let i = 0; i<slides.length; i++){
-		let dot = document.createElement("div");	
-		dot.classList.add("dot");
-
-		if(currentSlide === i){
-			dot.classList.add("dot_selected");
-		} 
-		carrouselElementsDots.appendChild(dot);
+function creaDots() {
+	for (let i = 0; i < slides.length; i++) {
+	  let dot = document.createElement("span");
+	  dot.classList.add("dot");
+	  if (i === currentSlide) {
+		dot.classList.add("dot_selected");
+	  }
+	  dot.addEventListener("click", () => {
+		goToSlide(i);
+	  });
+	  carrouselElementsDotsContainer.appendChild(dot);
 	}
-}
+  }
 
-//initialisation des dots
+function goToSlide(slideIndex) {
+	currentSlide = slideIndex;
+	updateCarousel();
+  }
+
 creaDots()
 
-// fonction click droit / click gauche
 function carouselClick(direction) {
 	if ('gauche' === direction) {
 		if(currentSlide<=0){
-			currentSlide = slides.length-1 
+			currentSlide = slides.length-1;
 		}else{
-			currentSlide--
+			currentSlide--;
 		}
 	}
 	else {
 		if(currentSlide>=slides.length-1){
 			currentSlide = 0;
 		}else {
-			currentSlide++
+			currentSlide++;
 		}
 	}
-	
-	//aprés mise à jour du currentSlide supp/créa des news dots
-	carrouselElementsDots.innerHTML = ""
-	creaDots()
+	updateCarousel();
+  }
+  
+function updateCarousel() {
+	let dots = document.querySelectorAll(".dot");
+	dots.forEach((dot, index) => {
+	  if (index === currentSlide) {
+		dot.classList.add("dot_selected");
+	  } else {
+		dot.classList.remove("dot_selected");
+	  }
+	});	
 
-	//changement de l'image
-	let src = "./assets/images/slideshow/"+ slides[currentSlide].image
-	carrouselElementsImage.setAttribute("src", src)
+	let src = "./assets/images/slideshow/"+ slides[currentSlide].image;
+	carrouselElementsImage.setAttribute("src", src);
 
-	//changement du texte
-	carrousellementsInfoE.innerHTML = slides[currentSlide].tagLine
+	carrouselElementsInfoE.innerHTML = slides[currentSlide].tagLine;
 
 }
 
