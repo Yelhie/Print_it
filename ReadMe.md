@@ -9,7 +9,7 @@ Projet de la formation OpenClassrooms intégrateur web dont voici les objectifs:
 - Changement de slide au clique des bullets points.
 - Mise en place d'un défilement infini au carroussel.
 
-### Instructions
+## Instructions
 
 - Lancer le projet avec liveserver
 
