@@ -29,4 +29,4 @@ Projet de la formation OpenClassrooms intégrateur web dont voici les objectifs:
 
 **Home page**
 
-![Print it home page](https://github.com/Yelhie/xi5ftcai605u/blob/master/img/printit_2024160855.jpg)
+![Print it home page](https://github.com/Yelhie/Print_it/blob/master/screenshot/printit_2024160855.jpg)
